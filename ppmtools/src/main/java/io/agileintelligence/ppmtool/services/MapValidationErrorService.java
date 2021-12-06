@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Service
 public class MapValidationErrorService {
-
+//THIS MAPVALI... ENSURES WE ARE GETTING A VALID PROJECT OBJECT
 	public ResponseEntity<?> MapValidationService(BindingResult result) {
 		if (result.hasErrors()) {
 
