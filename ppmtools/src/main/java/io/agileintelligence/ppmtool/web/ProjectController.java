@@ -1,8 +1,11 @@
 package io.agileintelligence.ppmtool.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,10 +19,9 @@ import io.agileintelligence.ppmtool.services.ProjectService;
 //This wehre we will hit the API
 
 @RestController
-@RequestMapping("/api/project")//api and project are the route
+@RequestMapping("/api/project")
 public class ProjectController {
 
-	//for api we will hit we use the contorller
 	
 	@Autowired //for enabling 
 	private ProjectService projectService;
@@ -27,13 +29,14 @@ public class ProjectController {
 	
 	
 	@PostMapping("")// we will make the route for afterwards which will return response entity
-	public ResponseEntity<Project>createNewProject(@RequestBody Project project){
+	public ResponseEntity<?>createNewProject(@Valid @RequestBody Project project, BindingResult result){
+	
+		if(result.hasErrors()) {
+			return new ResponseEntity<String>("Invalid Project Object", HttpStatus.BAD_REQUEST);
+		}
 		Project project1 = projectService.saveOrUpdateProject(project);
-		
-		//have more contorl on JSON repsonses cuzz we will set up with React
 			return new ResponseEntity<Project>(project, HttpStatus.CREATED);
-	//responsenentity gives us contorl over json reponses...our method is createNewPRoject
-		
+
 	}
 	
 	
