@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.agileintelligence.ppmtool.domain.Project;
+import io.agileintelligence.ppmtool.services.MapValidationErrorService;
 import io.agileintelligence.ppmtool.services.ProjectService;
 
 
@@ -32,22 +33,19 @@ public class ProjectController {
 	private ProjectService projectService;
 	
 	
+	@Autowired
+	private MapValidationErrorService mapValidationService;
+	
 	
 	@PostMapping("")// we will make the route for afterwards which will return response entity
 	public ResponseEntity<?>createNewProject(@Valid @RequestBody Project project, BindingResult result){
 	
-		if(result.hasErrors()) {
-			
-			Map<String, String> errorMap = new HashMap<>();
-			
-			for(FieldError error: result.getFieldErrors()) {
-				errorMap.put(error.getField(),error.getDefaultMessage());
-			}
-			
-			return new ResponseEntity<Map<String, String>>(errorMap,HttpStatus.BAD_REQUEST);
-			//we return the "errorMap incase we have any issues running it
+		ResponseEntity<?> errorMap = mapValidationService.MapValidationService(result);
+		if(errorMap !=null) {
+			return errorMap;
 		}
 		
+		//This is returned when we have an invalid object 
 		
 		Project project1 = projectService.saveOrUpdateProject(project);
 			return new ResponseEntity<Project>(project, HttpStatus.CREATED);
