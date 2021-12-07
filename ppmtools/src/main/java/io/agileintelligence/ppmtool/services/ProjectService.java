@@ -35,4 +35,10 @@ public class ProjectService {
     	}
     	return project;
 }
+    
+    //will return list of all projects so when we load are dashboard in ui you can see al project
+    public Iterable<Project> findAllProjects(){
+    	return projectRepository.findAll();
+    	
+    }
 }
