@@ -5,6 +5,7 @@ import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddProject from "./components/Project/AddProject";
+import "bootstrap/dist/css/bootstrap.min.css";
 class App extends Component {
   render() {
     return (

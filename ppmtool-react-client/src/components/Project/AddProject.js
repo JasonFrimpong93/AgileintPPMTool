@@ -11,14 +11,15 @@ class AddProject extends Component {
       start_date: "",
       end_date: "",
     };
+
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    //the second this = this instance
   }
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
+
   onSubmit(e) {
     e.preventDefault();
     const newProject = {
@@ -28,18 +29,29 @@ class AddProject extends Component {
       start_date: this.state.start_date,
       end_date: this.state.end_date,
     };
+
     console.log(newProject);
   }
+
   render() {
     return (
       <div>
+        {
+          //check name attribute input fields
+          //create constructor
+          //set state
+          //set value on input fields
+          //create onChange function
+          //set onChange on each input field
+          //bind on constructor
+          //check state change in the react extension
+        }
+
         <div className="project">
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h5 className="display-4 text-center">
-                  Create Edit Project form
-                </h5>
+                <h5 className="display-4 text-center">Create Project form</h5>
                 <hr />
                 <form onSubmit={this.onSubmit}>
                   <div className="form-group">
