@@ -119,6 +119,8 @@ class AddProject extends Component {
     );
   }
 }
+//proptypes validate and func will create a place for the data exectued. the required ensure it will not be null value
+//connect will connect a value to a redux store
 AddProject.propTypes = {
   createProject: PropTypes.func.isRequired,
 };
