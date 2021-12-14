@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS } from "./types";
+import { GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./types";
 
 export const createProject = (project, history) => async (dispatch) => {
   try {
@@ -20,3 +20,4 @@ export const getProjects = () => async (dispatch) => {
     payload: res.data,
   });
 };
+//id paramater history if we have any errors we redirect back to the dashboard
