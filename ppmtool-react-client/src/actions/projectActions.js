@@ -20,7 +20,7 @@ export const getProjects = () => async (dispatch) => {
     payload: res.data,
   });
 };
-//id paramater history if we have any errors we redirect back to the dashboard
+
 export const getProject = (id, history) => async (dispatch) => {
   const res = await axios.get(`http://localhost:8080/api/project/${id}`);
   dispatch({
@@ -28,3 +28,4 @@ export const getProject = (id, history) => async (dispatch) => {
     payload: res.data,
   });
 };
+//id paramater history if we have any errors we redirect back to the dashboard

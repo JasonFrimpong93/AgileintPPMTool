@@ -23,7 +23,7 @@ class UpdateProject extends Component {
                     className="form-control form-control-lg "
                     placeholder="Project Name"
                     name="projectName"
-                    value={this.state.projectName}
+                    // value={this.projectName}
                   />
                 </div>
                 <div className="form-group">
@@ -71,13 +71,12 @@ class UpdateProject extends Component {
     );
   }
 }
+
 UpdateProject.propTypes = {
   getProject: PropTypes.func.isRequired,
   project: PropTypes.object.isRequired,
 };
-
 const mapStateToProps = (state) => ({
   project: state.project.project,
 });
-
 export default connect(mapStateToProps, { getProject })(UpdateProject);
