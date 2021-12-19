@@ -7,6 +7,10 @@ import io.agileintelligence.ppmtool.domain.Backlog;
 
 @Repository
 public interface BacklogRepository extends CrudRepository<Backlog, Long> {
+	
+	//jpa allows us to set up queries
+	//this returns a backlog object and we can wire into projectservice
+	Backlog findByProjectIdentifier(String Identifier);
 }
 
 
