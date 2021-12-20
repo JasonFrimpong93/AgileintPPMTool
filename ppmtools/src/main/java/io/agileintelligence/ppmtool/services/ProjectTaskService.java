@@ -33,16 +33,16 @@ public class ProjectTaskService {
 			BacklogSequence++;
 			// you want things to be chronologically order therefore if you delete one it still goes to the next number 
 			//then we want to update Back log SEQUENCE
-		
+			backlog.setPTSequence(BacklogSequence);
 			
 			// add seq to projectstask
 			projectTask.setProjectSequence(projectIdentifier+"-"+BacklogSequence);
-			projectTask.setProjectIdentifer(projectIdentifier);
+			projectTask.setProjectIdentifier(projectIdentifier);
 			
 			//INITIAL priority when priority null
-//			if(projectTask.getPriority()==0||projectTask.getPriority()==null) {
-//				projectTask.setPriority(3);
-//			}
+			if(projectTask.getPriority()==null) {
+				projectTask.setPriority(3);
+			}
 			//INITIAL status when stauts is null
 			if(projectTask.getStatus()==""||projectTask.getStatus()==null) {
 			projectTask.setStatus("TO_DO");
