@@ -16,6 +16,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Project {
@@ -45,6 +46,7 @@ public class Project {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")//when we load project backlpog oinfo avaiblble. casacade all the project is the owning side of the relationship
     //meaning that if you delete the project then everything that is a child will deleted and  go away like projectTask and backlog
     //but anything down stream will not be effected
+    @JsonIgnore
     private Backlog backlog;
     
 	public Project() {
