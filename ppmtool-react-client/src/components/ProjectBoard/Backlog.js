@@ -1,52 +1,45 @@
-import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
+import React, { Component } from "react";
+import ProjectTask from "./ProjectTasks/ProjectTask";
 
-export const createProject = (project, history) => async (dispatch) => {
-  try {
-    await axios.post("/api/project", project);
-    history.push("/dashboard");
-    dispatch({
-      type: GET_ERRORS,
-      payload: {},
-    });
-  } catch (err) {
-    dispatch({
-      type: GET_ERRORS,
-      payload: err.response.data,
-    });
+class Backlog extends Component {
+  render() {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+            <div className="card text-center mb-2">
+              <div className="card-header bg-secondary text-white">
+                <h3>TO DO</h3>
+              </div>
+            </div>
+            <ProjectTask />
+          </div>
+          <div className="col-md-4">
+            <div className="card text-center mb-2">
+              <div className="card-header bg-primary text-white">
+                <h3>In Progress</h3>
+              </div>
+            </div>
+            {
+              //  <!-- SAMPLE PROJECT TASK STARTS HERE -->
+              //         <!-- SAMPLE PROJECT TASK ENDS HERE -->
+            }
+          </div>
+          <div className="col-md-4">
+            <div className="card text-center mb-2">
+              <div className="card-header bg-success text-white">
+                <h3>Done</h3>
+              </div>
+            </div>
+            {
+              // <!-- SAMPLE PROJECT TASK STARTS HERE -->
+              // <!-- SAMPLE PROJECT TASK ENDS HERE -->
+            }
+          </div>
+        </div>
+      </div>
+    );
   }
-};
+}
 
-export const getProjects = () => async (dispatch) => {
-  const res = await axios.get("/api/project/all");
-  dispatch({
-    type: GET_PROJECTS,
-    payload: res.data,
-  });
-};
-
-export const getProject = (id, history) => async (dispatch) => {
-  try {
-    const res = await axios.get(`/api/project/${id}`);
-    dispatch({
-      type: GET_PROJECT,
-      payload: res.data,
-    });
-  } catch (error) {
-    history.push("/dashboard");
-  }
-};
-
-export const deleteProject = (id) => async (dispatch) => {
-  if (
-    window.confirm(
-      "Are you sure? This will delete the project and all the data related to it"
-    )
-  ) {
-    await axios.delete(`/api/project/${id}`);
-    dispatch({
-      type: DELETE_PROJECT,
-      payload: id,
-    });
-  }
-};
+export default Backlog;

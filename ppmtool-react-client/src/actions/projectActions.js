@@ -3,7 +3,7 @@ import { DELETE_PROJECT, GET_ERRORS, GET_PROJECT, GET_PROJECTS } from "./types";
 
 export const createProject = (project, history) => async (dispatch) => {
   try {
-    const res = await axios.post("/api/project", project);
+    await axios.post("/api/project", project);
     history.push("/dashboard");
     dispatch({
       type: GET_ERRORS,
@@ -24,7 +24,7 @@ export const getProjects = () => async (dispatch) => {
     payload: res.data,
   });
 };
-//id paramater history if we have any errors we redirect back to the dashboard
+
 export const getProject = (id, history) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/project/${id}`);
