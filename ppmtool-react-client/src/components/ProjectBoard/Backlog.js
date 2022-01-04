@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProjectTask from "./ProjectTasks/ProjectTask";
+import ProjectTask from "./ProjectTask/ProjectTask";
 
 class Backlog extends Component {
   render() {

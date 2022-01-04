@@ -10,7 +10,7 @@ import store from "./store";
 import UpdateProject from "./components/Project/UpdateProject";
 import ProjectBoard from "./components/ProjectBoard/ProjectBoard";
 import AddProjectTask from "./components/ProjectBoard/ProjectTask/AddProjectTask";
-import UpdateProjectTask from "./components/ProjectBoard/ProjectTasks/UpdateProjectTask";
+import UpdatedProjectTask from "./components/ProjectBoard/ProjectTask/UpdatedProjectTask";
 class App extends Component {
   render() {
     return (
@@ -30,7 +30,7 @@ class App extends Component {
             <Route
               exact
               path="/updateProjectTask/:backlog_id/:pt_id"
-              component={UpdateProjectTask}
+              component={UpdatedProjectTask}
             />
           </div>
         </Router>
