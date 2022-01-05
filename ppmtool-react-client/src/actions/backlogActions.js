@@ -52,7 +52,7 @@ export const getProjectTask =
     }
   };
 
-export const updateProjectTask =
+export const updatedProjectTask =
   (backlog_id, pt_id, project_task, history) => async (dispatch) => {
     try {
       await axios.patch(`/api/backlog/${backlog_id}/${pt_id}`, project_task);
