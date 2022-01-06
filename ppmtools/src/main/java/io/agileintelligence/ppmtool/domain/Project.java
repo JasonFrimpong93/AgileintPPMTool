@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
@@ -22,120 +23,139 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Project {
 //Added dependencies in pom for NotBlank
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @NotBlank(message = "Project name is required")
-	private String projectName;
+    private String projectName;
     @NotBlank(message ="Project Identifier is required")
     @Size(min=4, max=5, message = "Please use 4 to 5 characters")
     @Column(updatable = false, unique = true)
-	private String projectIdentifier;
+    private String projectIdentifier;
     @NotBlank(message = "Project description is required")
-	private String description;
+    private String description;
     @JsonFormat(pattern = "yyyy-mm-dd")
-	private Date start_date;
+    private Date start_date;
     @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date end_date;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    @Column(updatable = false)
+    private Date created_At;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date updated_At;
 
-	private Date end_date;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    @Column(updatable = false )
-	private Date created_At;
-    @JsonFormat(pattern = "yyyy-mm-dd")
-	private Date updated_At;
-
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")//when we load project backlpog oinfo avaiblble. casacade all the project is the owning side of the relationship
-    //meaning that if you delete the project then everything that is a child will deleted and  go away like projectTask and backlog
-    //but anything down stream will not be effected
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
     @JsonIgnore
     private Backlog backlog;
-    
-	public Project() {
 
-	}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private User user;
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    private String projectLeader;
 
-	public String getProjectName() {
-		return projectName;
-	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
-	}
 
-	public String getProjectIdentifier() {
-		return projectIdentifier;
-	}
+    public Project() {
+    }
 
-	public void setProjectIdentifier(String projectIdentifier) {
-		this.projectIdentifier = projectIdentifier;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public String getProjectName() {
+        return projectName;
+    }
 
-	public Date getStart_date() {
-		return start_date;
-	}
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
 
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
-	}
+    public String getProjectIdentifier() {
+        return projectIdentifier;
+    }
 
-	public Date getEnd_date() {
-		return end_date;
-	}
+    public void setProjectIdentifier(String projectIdentifier) {
+        this.projectIdentifier = projectIdentifier;
+    }
 
-	public void setEnd_date(Date end_date) {
-		this.end_date = end_date;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public Date getCreated_At() {
-		return created_At;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	public void setCreated_At(Date created_At) {
-		this.created_At = created_At;
-	}
+    public Date getStart_date() {
+        return start_date;
+    }
 
-	public Date getUpdated_At() {
-		return updated_At;
-	}
+    public void setStart_date(Date start_date) {
+        this.start_date = start_date;
+    }
 
-	public void setUpdated_At(Date updated_At) {
-		this.updated_At = updated_At;
-	}
-	
-	public Backlog getBacklog() {
-		return backlog;
-	}
+    public Date getEnd_date() {
+        return end_date;
+    }
 
-	public void setBacklog(Backlog backlog) {
-		this.backlog = backlog;
-	}
-	
+    public void setEnd_date(Date end_date) {
+        this.end_date = end_date;
+    }
 
-	@PrePersist
-	protected void onCreate() {
-		this.created_At = new Date();
-	}
+    public Date getCreated_At() {
+        return created_At;
+    }
 
-	@PreUpdate
-	protected void onUpdate() {
-		this.updated_At = new Date();
-	}
+    public void setCreated_At(Date created_At) {
+        this.created_At = created_At;
+    }
 
+    public Date getUpdated_At() {
+        return updated_At;
+    }
+
+    public void setUpdated_At(Date updated_At) {
+        this.updated_At = updated_At;
+    }
+
+    public Backlog getBacklog() {
+        return backlog;
+    }
+
+    public void setBacklog(Backlog backlog) {
+        this.backlog = backlog;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getProjectLeader() {
+        return projectLeader;
+    }
+
+    public void setProjectLeader(String projectLeader) {
+        this.projectLeader = projectLeader;
+    }
+
+    @PrePersist
+    protected void onCreate(){
+        this.created_At = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updated_At = new Date();
+    }
 
 	
 	
