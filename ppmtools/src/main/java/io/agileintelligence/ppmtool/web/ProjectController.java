@@ -18,12 +18,15 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 @RestController
 @RequestMapping("/api/project")
 @CrossOrigin
 public class ProjectController {
+
     @Autowired
     private ProjectService projectService;
+
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
@@ -38,18 +41,24 @@ public class ProjectController {
         return new ResponseEntity<Project>(project1, HttpStatus.CREATED);
     }
 
+
     @GetMapping("/{projectId}")
-    public ResponseEntity<?> getProjectById(@PathVariable String projectId){
-        Project project = projectService.findProjectByIdentifier(projectId);
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId, Principal principal){
+
+        Project project = projectService.findProjectByIdentifier(projectId, principal.getName());
+
         return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
+
+
     @GetMapping("/all")
-    public Iterable<Project>getAllProjects(){return projectService.findAllProjects();}
+    public Iterable<Project> getAllProjects(Principal principal){return projectService.findAllProjects(principal.getName());}
+
+
     @DeleteMapping("/{projectId}")
-    public ResponseEntity<?> deleteProject(@PathVariable String projectId){
-        projectService.deleteProjectByIdentifier(projectId);
+    public ResponseEntity<?> deleteProject(@PathVariable String projectId, Principal principal){
+        projectService.deleteProjectByIdentifier(projectId, principal.getName());
+
         return new ResponseEntity<String>("Project with ID: '"+projectId+"' was deleted", HttpStatus.OK);
     }
 }
-
-
