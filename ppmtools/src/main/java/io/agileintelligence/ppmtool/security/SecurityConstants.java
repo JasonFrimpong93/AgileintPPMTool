@@ -1,4 +1,4 @@
-package io.agileintelligence.ppmtool.domain.security;
+package io.agileintelligence.ppmtool.security;
 
 public class SecurityConstants {
 

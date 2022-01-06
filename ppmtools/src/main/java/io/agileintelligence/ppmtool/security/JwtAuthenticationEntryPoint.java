@@ -1,4 +1,4 @@
-package io.agileintelligence.ppmtool.domain.security;
+package io.agileintelligence.ppmtool.security;
 
 import com.google.gson.Gson;
 import io.agileintelligence.ppmtool.exceptions.InvalidLoginResponse;

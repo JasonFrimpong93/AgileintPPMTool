@@ -1,4 +1,4 @@
-package io.agileintelligence.ppmtool.domain.security;
+package io.agileintelligence.ppmtool.security;
 
 import io.agileintelligence.ppmtool.services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +27,7 @@ import static io.agileintelligence.ppmtool.security.SecurityConstants.SIGN_UP_UR
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  
-	@Autowired
+    @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Autowired
@@ -68,8 +67,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.html",
                         "/**/*.css",
                         "/**/*.js"
-                ).permitAll().antMatchers(SIGN_UP_URLS)
-          
+                ).permitAll()
+                .antMatchers(SIGN_UP_URLS).permitAll()
+                .antMatchers(H2_URL).permitAll()
                 .anyRequest().authenticated();
     }
 }
